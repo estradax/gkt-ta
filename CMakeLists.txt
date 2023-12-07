@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.20)
+project(tugas_akhir CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(freeglut_directory third_party/freeglut-3.4.0)
+
+set(FREEGLUT_BUILD_DEMOS OFF)
+set(OpenGL_GL_PREFERENCE LEGACY)
+add_subdirectory(${freeglut_directory})
+
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE ${freeglut_directory}/include)
+target_link_libraries(${PROJECT_NAME} freeglut)
+
+if(WIN32)
+  target_link_libraries(${PROJECT_NAME} glu32)
+elseif(UNIX AND NOT APPLE)
+  target_link_libraries(${PROJECT_NAME} GLU)
+endif()
