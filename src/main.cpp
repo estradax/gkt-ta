@@ -163,6 +163,36 @@ void DrawMoon() {
   }
 }
 
+void DrawSpruces() {
+  glColor3f(0.353, 0.741, 0.024);
+
+  glBegin(GL_QUADS);
+    glVertex2f(40, 40);
+    glVertex2f(41, 40);
+    glVertex2f(41, 45);
+    glVertex2f(40, 45);
+  glEnd();
+
+  DrawTriangle({38, 40}, 5, 6);
+  DrawTriangle({38, 37}, 5, 6);
+  DrawTriangle({38, 34}, 5, 6);
+  DrawTriangle({38, 31}, 5, 6);
+  DrawTriangle({38, 28}, 5, 6);
+
+  glBegin(GL_QUADS);
+    glVertex2f(46, 40);
+    glVertex2f(47, 40);
+    glVertex2f(47, 45);
+    glVertex2f(46, 45);
+  glEnd();
+
+  DrawTriangle({44, 40}, 5, 6);
+  DrawTriangle({44, 37}, 5, 6);
+  DrawTriangle({44, 34}, 5, 6);
+  DrawTriangle({44, 31}, 5, 6);
+  DrawTriangle({44, 28}, 5, 6);
+}
+
 void InitGL() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -179,7 +209,8 @@ void Display() {
   DrawMoon();
   DrawFirebon();
   DrawTent();
-
+  DrawSpruces();
+  
   glutSwapBuffers();
 }
 
