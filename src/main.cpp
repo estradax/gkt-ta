@@ -183,6 +183,20 @@ void DrawMoon() {
 }
 
 void DrawSpruces() {
+  glColor3f(0.094, 0.369, 0.027);
+  glBegin(GL_QUADS);
+    glVertex2f(43, 40);
+    glVertex2f(44, 40);
+    glVertex2f(44, 44);
+    glVertex2f(43, 44);
+  glEnd();
+
+  DrawTriangle({41, 40}, 5, 6);
+  DrawTriangle({41, 37}, 5, 6);
+  DrawTriangle({41, 34}, 5, 6);
+  DrawTriangle({41, 31}, 5, 6);
+  DrawTriangle({41, 28}, 5, 5);
+
   glColor3f(0.353, 0.741, 0.024);
 
   glBegin(GL_QUADS);
