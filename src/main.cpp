@@ -170,15 +170,22 @@ void DrawTent() {
 }
 
 Vector moon_position{0, 6};
+bool is_night = true;
 
 void DrawMoon() {
-  glColor3f(0.749, 0.749, 0.643);
+  if (is_night) {
+    glColor3f(0.749, 0.749, 0.643);
+  } else {
+    glColor3f(1, 0.969, 0.035);
+  }
+
   DrawCircle(moon_position, 5, 25);
 
   moon_position.SetX(moon_position.x() + 0.1);
   
   if (moon_position.x() >= 55) {
     moon_position.SetX(0);
+    is_night = !is_night;
   }
 }
 
@@ -243,7 +250,7 @@ void Display() {
   DrawFirebon();
   DrawTent();
   DrawSpruces();
-  
+
   glutSwapBuffers();
 }
 
