@@ -84,8 +84,9 @@ void DrawFirebon() {
   // draw fire
   glColor3f(0.941, 0.345, 0.098);
   DrawCircle({32, 28}, 1, 20);
+
   glBegin(GL_TRIANGLE_FAN);
-    glVertex2f(30, 27);
+    glVertex2f(32, 28);
     glVertex2f(31, 29);
     glVertex2f(32, 25);
   glEnd();
@@ -115,6 +116,7 @@ void DrawFirebon() {
   if (fire_position_3.y() <= 18) {
     fire_position_3.SetY(25);
   }
+
 
   // draw stone
   glColor3f(0.651, 0.647, 0.565);
@@ -172,7 +174,7 @@ void DrawTent() {
   glEnd();
 }
 
-Vector moon_position{0, 6};
+Vector moon_position{20, 6};
 bool is_night = true;
 
 void DrawMoon() {
@@ -186,7 +188,7 @@ void DrawMoon() {
 
   DrawCircle(moon_position, 5, 25);
 
-  moon_position.SetX(moon_position.x() + 0.1);
+  // moon_position.SetX(moon_position.x() + 0.1);
   
   if (moon_position.x() >= 55) {
     moon_position.SetX(0);
@@ -250,6 +252,9 @@ void InitGL() {
   glMatrixMode(GL_MODELVIEW);
 }
 
+float size = 1;
+float scale_factor = 0.01;
+
 void Display() {
   // set background color to blue-ish
   if (is_night) {
@@ -261,7 +266,18 @@ void Display() {
   glClear(GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
 
+  glPushMatrix();
+  glScalef(size, size, 1);
   DrawMoon();
+  glPopMatrix();
+
+  size += scale_factor;
+  if (size >= 2) {
+    scale_factor = -0.01;
+  } else if (size <= 1) {
+    scale_factor = 0.01;
+  }
+  
   DrawFirebon();
   DrawTent();
   DrawSpruces();
