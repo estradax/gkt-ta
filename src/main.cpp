@@ -74,12 +74,14 @@ Vector fire_position_2{35, 29};
 Vector fire_position_3{35, 25};
 
 void DrawFirebon() {
+  // draw log
   glColor3f(0.431, 0.278, 0.165);
   DrawLog({29, 30}, 1, 7, 20);
   DrawLog({30, 31}, 1, 7, 15);
   DrawLog({32, 30}, 1, 7, 0);
   DrawLog({34, 30}, 1, 7, -15);
 
+  // draw fire
   glColor3f(0.941, 0.345, 0.098);
   DrawCircle({32, 28}, 1, 20);
   glBegin(GL_TRIANGLE_FAN);
@@ -114,6 +116,7 @@ void DrawFirebon() {
     fire_position_3.SetY(25);
   }
 
+  // draw stone
   glColor3f(0.651, 0.647, 0.565);
   glBegin(GL_QUADS);
     glVertex2f(32, 38);
@@ -174,8 +177,10 @@ bool is_night = true;
 
 void DrawMoon() {
   if (is_night) {
+    // set color to gray-ish
     glColor3f(0.749, 0.749, 0.643);
   } else {
+    // set color to yellow-ish
     glColor3f(1, 0.969, 0.035);
   }
 
@@ -236,12 +241,22 @@ void DrawSpruces() {
 void InitGL() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
+  // set x y max coordinate to
+  // left 0 (-x)
+  // right +50 (+x)
+  // bottom +50 (-y)
+  // top 0 (+y)
   gluOrtho2D(0, 50, 50, 0);
   glMatrixMode(GL_MODELVIEW);
 }
 
 void Display() {
-  glClearColor(0.212, 0.525, 0.588, 1);
+  // set background color to blue-ish
+  if (is_night) {
+    glClearColor(0.145, 0.263, 0.329, 1);
+  } else {
+    glClearColor(0.212, 0.525, 0.588, 1);
+  }
 
   glClear(GL_COLOR_BUFFER_BIT);
   glLoadIdentity();
@@ -256,19 +271,19 @@ void Display() {
 
 void Timer(int) {
   glutPostRedisplay();
-  glutTimerFunc(1000/60, Timer, 0);
+  glutTimerFunc(1000/60, Timer, 0); // 60 fps
 }
 
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
-  glutInitWindowSize(800, 600);
+  glutInitWindowSize(800, 600); // set window size to 800x600
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 
-  glutCreateWindow("Tugas Akhir");
+  glutCreateWindow("Tugas Akhir"); // title "Tugas Akhir"
 
   glutDisplayFunc(Display);
   glutTimerFunc(0, Timer, 0);
-  InitGL();
+  InitGL(); // init
 
   glutMainLoop();
 
